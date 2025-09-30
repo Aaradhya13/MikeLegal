@@ -1,16 +1,37 @@
 import { useState } from 'react'
-import { Layout, Typography, Row, Col } from 'antd'
+import { Layout, Typography, Row, Col, Button, Space } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
 import TaskCalendar from './components/TaskCalendar'
+import TaskForm from './components/TaskForm'
+import TaskList from './components/TaskList'
 import './App.css'
 
 const { Header, Content } = Layout
 const { Title } = Typography
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [editTask, setEditTask] = useState(null)
+  const { selectedDate } = useSelector(state => state.tasks)
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date)
+    setShowModal(true)
+  }
+
+  const handleAddTask = () => {
+    setEditTask(null)
+    setShowModal(true)
+  }
+
+  const handleEditTask = (task) => {
+    setEditTask(task)
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setEditTask(null)
   }
 
   return (
@@ -27,12 +48,24 @@ function App() {
           </Col>
           <Col span={8}>
             <div style={{ background: '#fff', padding: '24px', borderRadius: '8px' }}>
-              <Title level={4}>Tasks for {selectedDate || 'Select a date'}</Title>
-              {/* Task list will go here */}
+              <Space style={{ width: '100%', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <Title level={4} style={{ margin: 0 }}>Tasks for {selectedDate}</Title>
+                <Button type="primary" icon={<PlusOutlined />} onClick={handleAddTask}>
+                  Add Task
+                </Button>
+              </Space>
+              <TaskList selectedDate={selectedDate} onEditTask={handleEditTask} />
             </div>
           </Col>
         </Row>
       </Content>
+      
+      <TaskForm 
+        visible={showModal}
+        onClose={handleCloseModal}
+        selectedDate={selectedDate}
+        editTask={editTask}
+      />
     </Layout>
   )
 }
