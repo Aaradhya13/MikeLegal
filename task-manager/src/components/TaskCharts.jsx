@@ -15,12 +15,13 @@ const COLORS = {
 const TaskCharts = () => {
   const { tasks } = useSelector(state => state.tasks)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [appliedCategory, setAppliedCategory] = useState('all')
   const [chartType, setChartType] = useState('bar')
 
   const getFilteredData = () => {
-    const filteredTasks = selectedCategory === 'all' 
+    const filteredTasks = appliedCategory === 'all' 
       ? tasks 
-      : tasks.filter(task => task.category === selectedCategory)
+      : tasks.filter(task => task.category === appliedCategory)
 
     const categoryCount = {}
     filteredTasks.forEach(task => {
@@ -34,8 +35,13 @@ const TaskCharts = () => {
     }))
   }
 
+  const handleApply = () => {
+    setAppliedCategory(selectedCategory)
+  }
+
   const handleReset = () => {
     setSelectedCategory('all')
+    setAppliedCategory('all')
   }
 
   const chartData = getFilteredData()
@@ -68,6 +74,7 @@ const TaskCharts = () => {
         </Col>
         <Col>
           <Space>
+            <Button type="primary" onClick={handleApply}>Apply</Button>
             <Button onClick={handleReset}>Reset</Button>
           </Space>
         </Col>
