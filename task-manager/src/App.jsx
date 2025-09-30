@@ -1,34 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Layout, Typography, Row, Col } from 'antd'
+import TaskCalendar from './components/TaskCalendar'
 import './App.css'
 
+const { Header, Content } = Layout
+const { Title } = Typography
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedDate, setSelectedDate] = useState(null)
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date)
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Layout style={{ minHeight: '100vh' }}>
+      <Header style={{ background: '#fff', padding: '0 24px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+        <Title level={2} style={{ margin: '16px 0', color: '#1890ff' }}>
+          Daily Task Manager
+        </Title>
+      </Header>
+      <Content style={{ padding: '24px' }}>
+        <Row gutter={24}>
+          <Col span={16}>
+            <TaskCalendar onDateSelect={handleDateSelect} />
+          </Col>
+          <Col span={8}>
+            <div style={{ background: '#fff', padding: '24px', borderRadius: '8px' }}>
+              <Title level={4}>Tasks for {selectedDate || 'Select a date'}</Title>
+              {/* Task list will go here */}
+            </div>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   )
 }
 
