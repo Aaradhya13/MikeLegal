@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import TaskCalendar from './components/TaskCalendar'
 import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
+import TaskCharts from './components/TaskCharts'
 import './App.css'
 
 const { Header, Content } = Layout
@@ -45,6 +46,7 @@ function App() {
         <Row gutter={24}>
           <Col span={16}>
             <TaskCalendar onDateSelect={handleDateSelect} />
+            <TaskCharts />
           </Col>
           <Col span={8}>
             <div style={{ background: '#fff', padding: '24px', borderRadius: '8px' }}>

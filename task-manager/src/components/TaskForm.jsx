@@ -21,7 +21,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
     title: editTask?.title || '',
     description: editTask?.description || '',
     date: editTask?.date || selectedDate,
-    category: editTask?.category || 'info'
+    category: editTask?.category || 'default'
   }
 
   const handleSubmit = (values) => {
