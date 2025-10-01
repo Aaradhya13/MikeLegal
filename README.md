@@ -19,6 +19,7 @@ Want to try it out locally? Here’s how:
 ```bash
 git clone https://github.com/Aaradhya13/MikeLegal.git
 cd MikeLegal/task-manager
+```
 
 ### 2. Install dependencies
 
