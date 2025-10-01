@@ -33,9 +33,14 @@ npm install
 npm run dev
 ```
 
-Now, open http://localhost:5173 in your browser and you’re good to go.
+Once the server is running, open your browser and navigate to:  
+👉 [http://localhost:5173](http://localhost:5173)
 
-Tech Stack
-React
-Vite
-ESLint
+---
+
+## 🛠️ Tech Stack
+
+- ⚛️ **React** — Component-based UI  
+- ⚡ **Vite** — Fast build tool and dev server  
+- 🧹 **ESLint** — Linting for clean and consistent code  
+
