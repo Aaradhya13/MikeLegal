@@ -44,8 +44,6 @@ Manage daily tasks on a **calendar interface**, categorize them, and visualize t
 ```bash
 git clone https://github.com/Aaradhya13/MikeLegal.git
 cd MikeLegal/task-manager
-
-
 ```
 
 ### 2. Install dependencies
