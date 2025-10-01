@@ -9,15 +9,15 @@ const { confirm } = Modal
 const categoryColors = {
   success: 'green',
   warning: 'orange', 
-  error: 'red',
-  default: 'blue'
+  issue: 'red',
+  info: 'blue'
 }
 
 const categoryLabels = {
   success: 'Success',
   warning: 'Warning',
-  error: 'Issue',
-  default: 'Info'
+  issue: 'Issue',
+  info: 'Info'
 }
 
 const TaskList = ({ selectedDate, onEditTask }) => {
@@ -27,17 +27,9 @@ const TaskList = ({ selectedDate, onEditTask }) => {
   const dayTasks = tasks.filter(task => task.date === selectedDate)
 
   const handleDelete = (task) => {
-    confirm({
-      title: 'Delete Task',
-      icon: <ExclamationCircleOutlined />,
-      content: `Are you sure you want to delete "${task.title}"?`,
-      okText: 'Yes, Delete',
-      okType: 'danger',
-      cancelText: 'Cancel',
-      onOk() {
-        dispatch(deleteTask(task.id))
-      }
-    })
+    if (window.confirm(`Are you sure you want to delete "${task.title}"?`)) {
+      dispatch(deleteTask(task.id))
+    }
   }
 
   if (!selectedDate) {

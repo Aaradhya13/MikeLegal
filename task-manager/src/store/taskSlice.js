@@ -4,42 +4,11 @@ import dayjs from 'dayjs'
 const loadTasksFromStorage = () => {
   try {
     const savedTasks = localStorage.getItem('taskManager_tasks')
-    return savedTasks ? JSON.parse(savedTasks) : getSampleTasks()
+    return savedTasks ? JSON.parse(savedTasks) : []
   } catch (error) {
-    return getSampleTasks()
+    return []
   }
 }
-
-const getSampleTasks = () => [
-  {
-    id: 1,
-    title: 'Team Meeting',
-    description: 'Weekly sync with development team',
-    date: dayjs().format('YYYY-MM-DD'),
-    category: 'default'
-  },
-  {
-    id: 2,
-    title: 'Code Review',
-    description: 'Review pull requests from yesterday',
-    date: dayjs().format('YYYY-MM-DD'),
-    category: 'success'
-  },
-  {
-    id: 3,
-    title: 'Fix Bug #123',
-    description: 'Critical bug in user authentication',
-    date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
-    category: 'error'
-  },
-  {
-    id: 4,
-    title: 'Update Documentation',
-    description: 'Update API documentation for new endpoints',
-    date: dayjs().add(2, 'day').format('YYYY-MM-DD'),
-    category: 'warning'
-  }
-]
 
 const taskSlice = createSlice({
   name: 'tasks',

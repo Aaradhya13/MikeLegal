@@ -8,8 +8,8 @@ const { Option } = Select
 const COLORS = {
   success: '#52c41a',
   warning: '#faad14', 
-  error: '#ff4d4f',
-  default: '#1890ff'
+  issue: '#ff4d4f',
+  info: '#1890ff'
 }
 
 const TaskCharts = () => {
@@ -47,22 +47,21 @@ const TaskCharts = () => {
   const chartData = getFilteredData()
 
   return (
-    <Card title="Task Analytics" style={{ marginTop: '24px' }}>
-      <Row gutter={16} style={{ marginBottom: '16px' }}>
-        <Col>
+    <Card title="Task Count by Category" className="charts-card">
+      <div className="chart-controls">
+        <div className="control-group">
           <Select
             value={selectedCategory}
             onChange={setSelectedCategory}
             style={{ width: 150 }}
+            placeholder="Select Category"
           >
             <Option value="all">All Categories</Option>
             <Option value="success">Success</Option>
             <Option value="warning">Warning</Option>
-            <Option value="error">Issue</Option>
-            <Option value="default">Info</Option>
+            <Option value="issue">Issue</Option>
+            <Option value="info">Info</Option>
           </Select>
-        </Col>
-        <Col>
           <Select
             value={chartType}
             onChange={setChartType}
@@ -71,23 +70,29 @@ const TaskCharts = () => {
             <Option value="bar">Bar Chart</Option>
             <Option value="pie">Pie Chart</Option>
           </Select>
-        </Col>
-        <Col>
-          <Space>
-            <Button type="primary" onClick={handleApply}>Apply</Button>
-            <Button onClick={handleReset}>Reset</Button>
-          </Space>
-        </Col>
-      </Row>
+        </div>
+        <div className="action-buttons">
+          <Button className="apply-btn" onClick={handleApply}>Apply</Button>
+          <Button onClick={handleReset}>Reset</Button>
+        </div>
+      </div>
 
-      <div style={{ height: '300px' }}>
+      <div className="chart-container">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === 'bar' ? (
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category" />
-              <YAxis />
-              <Tooltip />
+              <XAxis 
+                dataKey="category" 
+              />
+              <YAxis 
+                allowDecimals={false}
+                label={{ value: 'Number of Tasks', angle: -90, position: 'insideLeft' }}
+              />
+              <Tooltip 
+                formatter={(value) => [value, 'Tasks']}
+                labelFormatter={(label) => `Category: ${label}`}
+              />
               <Bar dataKey="count" fill="#1890ff">
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
@@ -102,13 +107,15 @@ const TaskCharts = () => {
                 cy="50%"
                 outerRadius={80}
                 dataKey="count"
-                label={({ category, count }) => `${category}: ${count}`}
+                label={({ category, count }) => `${category}: ${count} tasks`}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip 
+                formatter={(value) => [value, 'Tasks']}
+              />
             </PieChart>
           )}
         </ResponsiveContainer>

@@ -11,17 +11,17 @@ const { Option } = Select
 const validationSchema = Yup.object({
   title: Yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
   description: Yup.string(),
-  category: Yup.string().required('Category is required')
+  category: Yup.string().required('Category is required').oneOf(['success', 'warning', 'issue', 'info'], 'Invalid category')
 })
 
-const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
+const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
   const dispatch = useDispatch()
 
   const initialValues = {
     title: editTask?.title || '',
     description: editTask?.description || '',
     date: editTask?.date || selectedDate,
-    category: editTask?.category || 'default'
+    category: editTask?.category || 'info'
   }
 
   const handleSubmit = (values) => {
@@ -42,11 +42,11 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
   return (
     <Modal
       title={editTask ? 'Edit Task' : 'Add New Task'}
-      open={visible}
+      open={open}
       onCancel={onClose}
       footer={null}
       width={500}
-      destroyOnClose
+      destroyOnHidden
     >
       <Formik
         initialValues={initialValues}
@@ -60,6 +60,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
               label="Task Title" 
               validateStatus={errors.title && touched.title ? 'error' : ''}
               help={errors.title && touched.title ? errors.title : ''}
+              required
             >
               <Input
                 name="title"
@@ -94,16 +95,18 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
               label="Category"
               validateStatus={errors.category && touched.category ? 'error' : ''}
               help={errors.category && touched.category ? errors.category : ''}
+              required
             >
               <Select
                 value={values.category}
                 onChange={(value) => setFieldValue('category', value)}
                 size="large"
+                placeholder="Select category"
               >
                 <Option value="success">✅ Success</Option>
                 <Option value="warning">⚠️ Warning</Option>
-                <Option value="error">🚨 Issue</Option>
-                <Option value="default">ℹ️ Info</Option>
+                <Option value="issue">🚨 Issue</Option>
+                <Option value="info">ℹ️ Info</Option>
               </Select>
             </Form.Item>
 

@@ -12,8 +12,9 @@ const TaskCalendar = ({ onDateSelect }) => {
     return tasks.filter(task => task.date === dateStr)
   }
 
-  const dateCellRender = (value) => {
-    const dayTasks = getTasksForDate(value)
+  const cellRender = (current, info) => {
+    if (info.type !== 'date') return info.originNode
+    const dayTasks = getTasksForDate(current)
     return (
       <div>
         {dayTasks.map(task => (
@@ -21,7 +22,7 @@ const TaskCalendar = ({ onDateSelect }) => {
             key={task.id} 
             status={task.category} 
             text={task.title.length > 8 ? task.title.substring(0, 8) + '...' : task.title}
-            style={{ fontSize: '10px', display: 'block' }}
+            style={{ fontSize: '12px', display: 'block' }}
           />
         ))}
       </div>
@@ -36,9 +37,10 @@ const TaskCalendar = ({ onDateSelect }) => {
 
   return (
     <Calendar 
-      dateCellRender={dateCellRender}
+      cellRender={cellRender}
       onSelect={onSelect}
       value={dayjs(selectedDate)}
+      fullscreen={false}
     />
   )
 }
