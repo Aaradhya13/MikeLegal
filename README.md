@@ -25,11 +25,13 @@ cd MikeLegal/task-manager
 
 ```bash
 npm install
+```
 
 ### 3. Start the development server
 
 ```bash
 npm run dev
+```
 
 Now, open http://localhost:5173 in your browser and you’re good to go.
 
