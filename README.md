@@ -1,26 +1,26 @@
-# 📅 Task Manager
+# Task Manager
 
 A modern Task Manager app built with **React + Ant Design**.  
-Manage daily tasks on a **calendar interface**, categorize them, and visualize task distribution with charts. 🚀  
+Manage daily tasks on a **calendar interface**, categorize them, and visualize task distribution with charts.  
 
 ---
 
-## ✨ Features
+##  Features
 
-- 📆 **Calendar View**  
+-  **Calendar View**  
   - Ant Design `<Calendar />` component  
   - Click on any date to view or add tasks  
 
-- ➕ **Add / Edit Tasks**  
+-  **Add / Edit Tasks**  
   - Modal or drawer with **Formik + Yup** form validation  
   - Fields: Title (required), Description (optional), Date (auto-filled), Category (success, warning, issue, info)  
 
-- 📋 **Task Listing**  
+-  **Task Listing**  
   - View tasks for the selected date  
   - Edit or Delete tasks  
   - Categories displayed with **Ant Design Tags** (color-coded)  
 
-- 📊 **Chart Visualization**  
+-  **Chart Visualization**  
   - Bar or Pie chart of task counts by category  
   - Dropdown filters with **Apply** and **Reset** buttons  
 
@@ -28,12 +28,12 @@ Manage daily tasks on a **calendar interface**, categorize them, and visualize t
 
 ## 🛠️ Tech Stack
 
-- ⚛️ **React** — Component-based UI  
-- 🎨 **Ant Design** — UI components (Calendar, Modal, Form, Tags)  
-- 🗂️ **Redux Toolkit** — State management  
-- 📝 **Formik + Yup** — Form handling & validation  
-- 📊 **Chart.js / Recharts** — Data visualization  
-- 📅 **Day.js (optional)** — Date formatting  
+-  **React** — Component-based UI  
+-  **Ant Design** — UI components (Calendar, Modal, Form, Tags)  
+-  **Redux Toolkit** — State management  
+-  **Formik + Yup** — Form handling & validation  
+-  **Chart.js / Recharts** — Data visualization  
+-  **Day.js (optional)** — Date formatting  
 
 ---
 
