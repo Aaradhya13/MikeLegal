@@ -1,7 +1,7 @@
 # Task Manager
 
 A minimal, modern Task Manager app built with React + Vite.  
-Manage your daily tasks with ease—fast, simple, and clean. 🚀
+Manage your daily tasks with ease-fast, simple, and clean. 
 
 ## Features
 
@@ -40,7 +40,7 @@ Once the server is running, open your browser and navigate to:
 
 ## 🛠️ Tech Stack
 
-- ⚛️ **React** — Component-based UI  
-- ⚡ **Vite** — Fast build tool and dev server  
-- 🧹 **ESLint** — Linting for clean and consistent code  
+- **React** — Component-based UI  
+- **Vite** — Fast build tool and dev server  
+- **ESLint** — Linting for clean and consistent code  
 
