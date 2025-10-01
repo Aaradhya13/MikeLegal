@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Select, DatePicker, Button } from 'antd'
+import { Modal, Form, Input, Select, DatePicker, Button, message } from 'antd'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -9,7 +9,7 @@ const { TextArea } = Input
 const { Option } = Select
 
 const validationSchema = Yup.object({
-  title: Yup.string().required('Title is required'),
+  title: Yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
   description: Yup.string(),
   category: Yup.string().required('Category is required')
 })
@@ -25,12 +25,18 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
   }
 
   const handleSubmit = (values) => {
-    if (editTask) {
-      dispatch(updateTask({ ...editTask, ...values }))
-    } else {
-      dispatch(addTask(values))
+    try {
+      if (editTask) {
+        dispatch(updateTask({ ...editTask, ...values }))
+        message.success('Task updated successfully!')
+      } else {
+        dispatch(addTask(values))
+        message.success('Task added successfully!')
+      }
+      onClose()
+    } catch (error) {
+      message.error('Something went wrong. Please try again.')
     }
-    onClose()
   }
 
   return (
@@ -40,6 +46,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
       onCancel={onClose}
       footer={null}
       width={500}
+      destroyOnClose
     >
       <Formik
         initialValues={initialValues}
@@ -50,7 +57,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
         {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => (
           <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item 
-              label="Title" 
+              label="Task Title" 
               validateStatus={errors.title && touched.title ? 'error' : ''}
               help={errors.title && touched.title ? errors.title : ''}
             >
@@ -59,6 +66,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
                 value={values.title}
                 onChange={handleChange}
                 placeholder="Enter task title"
+                size="large"
               />
             </Form.Item>
 
@@ -69,6 +77,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
                 onChange={handleChange}
                 placeholder="Enter task description (optional)"
                 rows={3}
+                size="large"
               />
             </Form.Item>
 
@@ -77,6 +86,7 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
                 value={dayjs(values.date)}
                 onChange={(date) => setFieldValue('date', date.format('YYYY-MM-DD'))}
                 style={{ width: '100%' }}
+                size="large"
               />
             </Form.Item>
 
@@ -88,19 +98,20 @@ const TaskForm = ({ visible, onClose, selectedDate, editTask = null }) => {
               <Select
                 value={values.category}
                 onChange={(value) => setFieldValue('category', value)}
+                size="large"
               >
-                <Option value="success">Success</Option>
-                <Option value="warning">Warning</Option>
-                <Option value="error">Issue</Option>
-                <Option value="default">Info</Option>
+                <Option value="success">✅ Success</Option>
+                <Option value="warning">⚠️ Warning</Option>
+                <Option value="error">🚨 Issue</Option>
+                <Option value="default">ℹ️ Info</Option>
               </Select>
             </Form.Item>
 
             <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>
-              <Button onClick={onClose} style={{ marginRight: 8 }}>
+              <Button onClick={onClose} style={{ marginRight: 8 }} size="large">
                 Cancel
               </Button>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" size="large">
                 {editTask ? 'Update' : 'Add'} Task
               </Button>
             </Form.Item>

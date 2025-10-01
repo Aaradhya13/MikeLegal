@@ -1,9 +1,10 @@
-import { List, Tag, Button, Space, Typography, Empty } from 'antd'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { List, Tag, Button, Space, Typography, Empty, Modal } from 'antd'
+import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTask } from '../store/taskSlice'
 
 const { Text } = Typography
+const { confirm } = Modal
 
 const categoryColors = {
   success: 'green',
@@ -12,14 +13,31 @@ const categoryColors = {
   default: 'blue'
 }
 
+const categoryLabels = {
+  success: 'Success',
+  warning: 'Warning',
+  error: 'Issue',
+  default: 'Info'
+}
+
 const TaskList = ({ selectedDate, onEditTask }) => {
   const { tasks } = useSelector(state => state.tasks)
   const dispatch = useDispatch()
 
   const dayTasks = tasks.filter(task => task.date === selectedDate)
 
-  const handleDelete = (taskId) => {
-    dispatch(deleteTask(taskId))
+  const handleDelete = (task) => {
+    confirm({
+      title: 'Delete Task',
+      icon: <ExclamationCircleOutlined />,
+      content: `Are you sure you want to delete "${task.title}"?`,
+      okText: 'Yes, Delete',
+      okType: 'danger',
+      cancelText: 'Cancel',
+      onOk() {
+        dispatch(deleteTask(task.id))
+      }
+    })
   }
 
   if (!selectedDate) {
@@ -40,12 +58,14 @@ const TaskList = ({ selectedDate, onEditTask }) => {
               type="text" 
               icon={<EditOutlined />} 
               onClick={() => onEditTask(task)}
+              title="Edit task"
             />,
             <Button 
               type="text" 
               danger 
               icon={<DeleteOutlined />} 
-              onClick={() => handleDelete(task.id)}
+              onClick={() => handleDelete(task)}
+              title="Delete task"
             />
           ]}
         >
@@ -54,11 +74,11 @@ const TaskList = ({ selectedDate, onEditTask }) => {
               <Space>
                 <Text strong>{task.title}</Text>
                 <Tag color={categoryColors[task.category]}>
-                  {task.category}
+                  {categoryLabels[task.category]}
                 </Tag>
               </Space>
             }
-            description={task.description}
+            description={task.description || 'No description'}
           />
         </List.Item>
       )}
