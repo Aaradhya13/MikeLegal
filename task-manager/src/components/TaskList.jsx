@@ -27,7 +27,7 @@ const TaskList = ({ selectedDate, onEditTask }) => {
   const dayTasks = tasks.filter(task => task.date === selectedDate)
 
   const handleDelete = (task) => {
-    if (window.confirm(`Are you sure you want to delete "${task.title}"?`)) {
+    if (confirm('Delete this task?')) {
       dispatch(deleteTask(task.id))
     }
   }

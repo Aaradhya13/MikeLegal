@@ -1,15 +1,6 @@
 import { useState } from 'react'
-import { Layout, Typography, Button, Space, Tag, Avatar, Modal } from 'antd'
-import { 
-  PlusOutlined, 
-  EyeOutlined,
-  CalendarOutlined, 
-  ProjectOutlined, 
-  TeamOutlined, 
-  BarChartOutlined,
-  SettingOutlined,
-  UserOutlined
-} from '@ant-design/icons'
+import { Layout, Typography, Button, Space, Avatar, Modal } from 'antd'
+import { PlusOutlined, EyeOutlined, CalendarOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import TaskCalendar from './components/TaskCalendar'
@@ -61,11 +52,7 @@ function App() {
 
   const today = dayjs().format('YYYY-MM-DD')
   const todayTasks = tasks.filter(task => task.date === today)
-  const upcomingTasks = tasks.filter(task => task.date > today).sort((a, b) => new Date(a.date) - new Date(b.date))
-
-  const menuItems = [
-    { key: 'collaborations', icon: <TeamOutlined />, label: 'Calendar', active: true }
-  ]
+  const upcomingTasks = tasks.filter(task => task.date > today)
 
   return (
     <Layout className="app-layout">
@@ -78,25 +65,21 @@ function App() {
         <div className="sidebar-header">
           <div className="logo">
             <div className="logo-icon">TM</div>
-            <span className="logo-text">TaskManager</span>
+            <span className="logo-text">Task Manager</span>
           </div>
         </div>
         
-
-
         <div className="menu-section">
-          {menuItems.map(item => (
-            <div key={item.key} className={`menu-item ${item.active ? 'active' : ''}`}>
-              {item.icon}
-              <span>{item.label}</span>
-            </div>
-          ))}
+          <div className="menu-item active">
+            <CalendarOutlined />
+            <span>Calendar</span>
+          </div>
         </div>
       </Sider>
 
       <Layout className="main-layout">
         <div className="main-header">
-          <Title level={2} style={{ margin: 0, color: '#2c3e50' }}>Task Calendar Dashboard</Title>
+          <Title level={2} style={{ margin: 0 }}>Daily Task Manager</Title>
         </div>
 
         <Content className="main-content">
@@ -115,17 +98,12 @@ function App() {
               
               <div className="today-tasks">
                 {todayTasks.length > 0 ? todayTasks.map((task) => (
-                  <div key={task.id} className={`task-card ${task.category}`}>
-                    <Avatar size={32} style={{ backgroundColor: getAvatarColor(task.category) }}>
-                      {task.title.charAt(0)}
-                    </Avatar>
-                    <div className="task-info">
-                      <Text strong>{task.title}</Text>
-                      <Text className="task-time">Today</Text>
-                    </div>
+                  <div key={task.id} className="simple-task">
+                    <Text strong>{task.title}</Text>
+                    <Text style={{ color: '#666', fontSize: '12px' }}>({task.category})</Text>
                   </div>
                 )) : (
-                  <Text style={{ color: '#8c8c8c' }}>No tasks for today</Text>
+                  <Text style={{ color: '#999' }}>No tasks today</Text>
                 )}
               </div>
               
@@ -134,18 +112,13 @@ function App() {
               </div>
               
               <div className="upcoming-tasks">
-                {upcomingTasks.length > 0 ? upcomingTasks.map((task) => (
-                  <div key={task.id} className={`task-card ${task.category}`}>
-                    <Avatar size={32} style={{ backgroundColor: getAvatarColor(task.category) }}>
-                      {task.title.charAt(0)}
-                    </Avatar>
-                    <div className="task-info">
-                      <Text strong>{task.title}</Text>
-                      <Text className="task-time">{task.date}</Text>
-                    </div>
+                {upcomingTasks.length > 0 ? upcomingTasks.slice(0, 3).map((task) => (
+                  <div key={task.id} className="simple-task">
+                    <Text strong>{task.title}</Text>
+                    <Text style={{ color: '#666', fontSize: '12px' }}>{task.date}</Text>
                   </div>
                 )) : (
-                  <Text style={{ color: '#8c8c8c' }}>No upcoming tasks</Text>
+                  <Text style={{ color: '#999' }}>No upcoming tasks</Text>
                 )}
               </div>
               
@@ -197,14 +170,6 @@ function App() {
   )
 }
 
-const getAvatarColor = (category) => {
-  const colors = {
-    success: '#52c41a',
-    warning: '#fa8c16', 
-    issue: '#ff4d4f',
-    info: '#1890ff'
-  }
-  return colors[category] || '#d9d9d9'
-}
+
 
 export default App

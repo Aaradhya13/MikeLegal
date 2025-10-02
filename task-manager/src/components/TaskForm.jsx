@@ -9,9 +9,9 @@ const { TextArea } = Input
 const { Option } = Select
 
 const validationSchema = Yup.object({
-  title: Yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
+  title: Yup.string().required('Title is required'),
   description: Yup.string(),
-  category: Yup.string().required('Category is required').oneOf(['success', 'warning', 'issue', 'info'], 'Invalid category')
+  category: Yup.string().required('Category is required')
 })
 
 const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
@@ -25,28 +25,25 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
   }
 
   const handleSubmit = (values) => {
-    try {
-      if (editTask) {
-        dispatch(updateTask({ ...editTask, ...values }))
-        message.success('Task updated successfully!')
-      } else {
-        dispatch(addTask(values))
-        message.success('Task added successfully!')
-      }
-      onClose()
-    } catch (error) {
-      message.error('Something went wrong. Please try again.')
+    // Add or update task
+    console.log('Submitting task:', values) // for debugging
+    if (editTask) {
+      dispatch(updateTask({ ...editTask, ...values }))
+      message.success('Task updated!')
+    } else {
+      dispatch(addTask(values))
+      message.success('Task added!')
     }
+    onClose()
   }
 
   return (
     <Modal
-      title={editTask ? 'Edit Task' : 'Add New Task'}
+      title={editTask ? 'Edit Task' : 'Add Task'}
       open={open}
       onCancel={onClose}
       footer={null}
       width={500}
-      destroyOnHidden
     >
       <Formik
         initialValues={initialValues}
@@ -103,10 +100,10 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
                 size="large"
                 placeholder="Select category"
               >
-                <Option value="success">✅ Success</Option>
-                <Option value="warning">⚠️ Warning</Option>
-                <Option value="issue">🚨 Issue</Option>
-                <Option value="info">ℹ️ Info</Option>
+                <Option value="success">Success</Option>
+                <Option value="warning">Warning</Option>
+                <Option value="issue">Issue</Option>
+                <Option value="info">Info</Option>
               </Select>
             </Form.Item>
 

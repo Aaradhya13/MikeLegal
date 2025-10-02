@@ -11,9 +11,7 @@
 
 .app-sidebar {
   background: #1a1a1a !important;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.15);
-  position: relative;
-  z-index: 100;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
 }
 
 .sidebar-header {
@@ -184,8 +182,7 @@
 }
 
 .task-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: #f0f0f0;
 }
 
 .task-card.success {
@@ -217,6 +214,18 @@
   font-size: 12px;
   display: block;
   margin-top: 2px;
+}
+
+.simple-task {
+  padding: 8px 12px;
+  margin: 4px 0;
+  background: #f9f9f9;
+  border-radius: 6px;
+  border-left: 3px solid #ddd;
+}
+
+.simple-task:hover {
+  background: #f0f0f0;
 }
 
 .ant-picker-calendar {

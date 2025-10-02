@@ -1,16 +1,41 @@
-# React + Vite
+# Daily Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application for managing daily tasks with calendar interface and data visualization.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Calendar View**: Click any date to add or view tasks
+- **Task Management**: Add, edit, and delete tasks with categories
+- **Data Visualization**: Bar and pie charts showing task distribution
+- **Category Filtering**: Filter tasks and charts by category
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- Ant Design
+- Redux Toolkit
+- Formik + Yup
+- Recharts
+- Day.js
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Usage
+
+1. Click on any calendar date
+2. Add tasks with title, description, and category
+3. View tasks in the sidebar
+4. Analyze task distribution in charts
+5. Filter charts by category
+
+## Categories
+
+- Success (Green)
+- Warning (Orange) 
+- Issue (Red)
+- Info (Blue)
