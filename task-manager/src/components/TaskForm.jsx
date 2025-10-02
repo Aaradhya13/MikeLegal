@@ -24,7 +24,7 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
     category: editTask?.category || 'info'
   }
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { resetForm }) => {
     // Add or update task
     console.log('Submitting task:', values) // for debugging
     if (editTask) {
@@ -34,6 +34,11 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
       dispatch(addTask(values))
       message.success('Task added!')
     }
+    resetForm()
+    onClose()
+  }
+
+  const handleClose = () => {
     onClose()
   }
 
@@ -46,6 +51,7 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
       width={500}
     >
       <Formik
+        key={editTask?.id || 'new'}
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -108,7 +114,7 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
             </Form.Item>
 
             <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>
-              <Button onClick={onClose} style={{ marginRight: 8 }} size="large">
+              <Button onClick={handleClose} style={{ marginRight: 8 }} size="large">
                 Cancel
               </Button>
               <Button type="primary" htmlType="submit" size="large">
