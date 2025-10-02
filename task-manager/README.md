@@ -1,50 +1,60 @@
 # Daily Task Manager
 
-A React application for managing daily tasks with calendar interface and data visualization.
+A React application for managing daily tasks with a calendar interface and data visualization.
+
+👉 **Live Demo**: [https://mike-legal-theta.vercel.app/](https://mike-legal-theta.vercel.app/)
+
+---
 
 ## Assignment Overview
 
-This project is built as per the requirements to create a task management application using React and Ant Design. The app allows users to add, view, and categorize tasks on a calendar interface, and visualize them through charts.
+This project is built as per the requirements to create a task management application using React and Ant Design. The app allows users to add, view, and categorize tasks on a calendar interface and visualize them through charts.
+
+---
 
 ## Features Implemented
 
 ### 1. Calendar View
-- Uses Ant Design's `<Calendar />` component
-- Allows clicking on any date to view or add tasks
-- Shows task indicators on dates with existing tasks
+- Uses Ant Design's `<Calendar />` component  
+- Allows clicking on any date to view or add tasks  
+- Shows task indicators on dates with existing tasks  
 
 ### 2. Add/Edit Task
-- Modal form with Formik + Yup validation
-- Fields: Title (required), Description (optional), Date (auto-filled), Category dropdown
-- Categories: success, warning, issue, info
-- Form validation using Yup
-- Tasks stored in Redux Toolkit state
+- Modal form with Formik + Yup validation  
+- Fields: Title (required), Description (optional), Date (auto-filled), Category dropdown  
+- Categories: `success`, `warning`, `issue`, `info`  
+- Form validation using Yup  
+- Tasks stored in Redux Toolkit state  
 
 ### 3. Task Listing
-- Displays tasks for the selected date
-- Each task has Edit and Delete options
-- Categories displayed using Ant Design Tags with color coding
-- Today's tasks and upcoming tasks sections
+- Displays tasks for the selected date  
+- Each task has Edit and Delete options  
+- Categories displayed using Ant Design Tags with color coding  
+- Today's tasks and upcoming tasks sections  
 
 ### 4. Chart Visualization
-- Bar and Pie charts showing task counts per category
-- Dropdown filters to filter by category
-- Apply and Reset buttons for filtering
-- Charts update based on selected filters
+- Bar and Pie charts showing task counts per category  
+- Dropdown filters to filter by category  
+- Apply and Reset buttons for filtering  
+- Charts update based on selected filters  
+
+---
 
 ## Tech Stack Used
 
-- **ReactJS** - Frontend framework
-- **Ant Design** - UI component library
-- **Redux Toolkit** - State management
-- **Formik + Yup** - Form handling and validation
-- **Recharts** - Chart visualization
-- **Day.js** - Date formatting
-- **Vite** - Build tool
+- **ReactJS** – Frontend framework  
+- **Ant Design** – UI component library  
+- **Redux Toolkit** – State management  
+- **Formik + Yup** – Form handling and validation  
+- **Recharts** – Chart visualization  
+- **Day.js** – Date formatting  
+- **Vite** – Build tool  
+
+---
 
 ## Installation and Setup
 
-1. Clone the repository:
+1. **Clone the repository**:
 ```bash
 git clone <repository-url>
 cd task-manager
