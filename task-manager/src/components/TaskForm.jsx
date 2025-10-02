@@ -11,6 +11,7 @@ const { Option } = Select
 const validationSchema = Yup.object({
   title: Yup.string().required('Title is required'),
   description: Yup.string(),
+  date: Yup.string().required('Date is required'),
   category: Yup.string().required('Category is required')
 })
 
@@ -85,12 +86,18 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
               />
             </Form.Item>
 
-            <Form.Item label="Date">
+            <Form.Item 
+              label="Date"
+              validateStatus={errors.date && touched.date ? 'error' : ''}
+              help={errors.date && touched.date ? errors.date : ''}
+              required
+            >
               <DatePicker
-                value={dayjs(values.date)}
-                onChange={(date) => setFieldValue('date', date.format('YYYY-MM-DD'))}
+                value={values.date ? dayjs(values.date) : null}
+                onChange={(date) => setFieldValue('date', date ? date.format('YYYY-MM-DD') : null)}
                 style={{ width: '100%' }}
                 size="large"
+                placeholder="Select date"
               />
             </Form.Item>
 
