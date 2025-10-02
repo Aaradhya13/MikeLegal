@@ -36,10 +36,12 @@ const TaskCharts = () => {
   }
 
   const handleApply = () => {
+    console.log('Applying filter:', selectedCategory) // for debugging
     setAppliedCategory(selectedCategory)
   }
 
   const handleReset = () => {
+    console.log('Resetting filters') // for debugging
     setSelectedCategory('all')
     setAppliedCategory('all')
   }
@@ -80,7 +82,10 @@ const TaskCharts = () => {
               <XAxis 
                 dataKey="category" 
               />
-              <YAxis />
+              <YAxis 
+                allowDecimals={false}
+                label={{ value: 'Number of Tasks', angle: -90, position: 'insideLeft' }}
+              />
               <Tooltip />
               <Bar dataKey="count" fill="#1890ff">
                 {chartData.map((entry, index) => (
@@ -96,7 +101,7 @@ const TaskCharts = () => {
                 cy="50%"
                 outerRadius={80}
                 dataKey="count"
-                label
+                label={({ category, count }) => `${category}: ${count}`}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

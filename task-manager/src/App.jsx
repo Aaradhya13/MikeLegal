@@ -52,7 +52,7 @@ function App() {
 
   const today = dayjs().format('YYYY-MM-DD')
   const todayTasks = tasks.filter(task => task.date === today)
-  const upcomingTasks = tasks.filter(task => task.date > today)
+  const upcomingTasks = tasks.filter(task => task.date > today).sort((a, b) => new Date(a.date) - new Date(b.date))
 
   return (
     <Layout className="app-layout">
@@ -112,7 +112,7 @@ function App() {
               </div>
               
               <div className="upcoming-tasks">
-                {upcomingTasks.length > 0 ? upcomingTasks.slice(0, 3).map((task) => (
+                {upcomingTasks.length > 0 ? upcomingTasks.map((task) => (
                   <div key={task.id} className="simple-task">
                     <Text strong>{task.title}</Text>
                     <Text style={{ color: '#666', fontSize: '12px' }}>{task.date}</Text>

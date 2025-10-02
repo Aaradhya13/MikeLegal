@@ -169,6 +169,26 @@
   flex-direction: column;
   gap: 12px;
   margin-bottom: 20px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.upcoming-tasks::-webkit-scrollbar {
+  width: 6px;
+}
+
+.upcoming-tasks::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.upcoming-tasks::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.upcoming-tasks::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }
 
 .task-card {
@@ -218,10 +238,13 @@
 
 .simple-task {
   padding: 8px 12px;
-  margin: 4px 0;
+  margin: 6px 0;
   background: #f9f9f9;
   border-radius: 6px;
   border-left: 3px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .simple-task:hover {

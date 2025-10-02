@@ -12,6 +12,17 @@ const TaskCalendar = ({ onDateSelect }) => {
     return tasks.filter(task => task.date === dateStr)
   }
 
+  const getBadgeStatus = (category) => {
+    // Map categories to badge status colors
+    const statusMap = {
+      success: 'success',  // green
+      warning: 'warning',  // yellow
+      issue: 'error',      // red
+      info: 'processing'   // blue
+    }
+    return statusMap[category] || 'default'
+  }
+
   const cellRender = (current, info) => {
     if (info.type !== 'date') return info.originNode
     const dayTasks = getTasksForDate(current)
@@ -20,7 +31,7 @@ const TaskCalendar = ({ onDateSelect }) => {
         {dayTasks.map(task => (
           <Badge 
             key={task.id} 
-            status={task.category} 
+            status={getBadgeStatus(task.category)} 
             text={task.title.length > 8 ? task.title.substring(0, 8) + '...' : task.title}
             style={{ fontSize: '12px', display: 'block' }}
           />
