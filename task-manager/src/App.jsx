@@ -42,7 +42,6 @@ function App() {
 
   const handleViewTasksForDate = () => {
     setShowDateOptions(false)
-    // Tasks are already visible in the sidebar for selected date
   }
 
   const handleAddTask = () => {

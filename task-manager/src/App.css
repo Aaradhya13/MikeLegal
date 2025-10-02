@@ -4,13 +4,11 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* App Layout */
 .app-layout {
   min-height: 100vh;
   background: #f5f5f5;
 }
 
-/* Black Sidebar */
 .app-sidebar {
   background: #1a1a1a !important;
   box-shadow: 2px 0 8px rgba(0,0,0,0.15);
@@ -88,7 +86,6 @@
   border-right: 3px solid #4CAF50;
 }
 
-/* Main Layout */
 .main-layout {
   background: #f5f5f5;
 }
@@ -106,7 +103,6 @@
   min-height: calc(100vh - 80px);
 }
 
-/* Filter Section */
 .filter-section {
   margin-bottom: 24px;
   display: flex;
@@ -135,7 +131,6 @@
   color: #1a1a1a;
 }
 
-/* Content Grid */
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -224,7 +219,6 @@
   margin-top: 2px;
 }
 
-/* Calendar Styling */
 .ant-picker-calendar {
   background: transparent;
   border: none;
@@ -265,7 +259,6 @@
   font-weight: 600;
 }
 
-/* Button Styling */
 .ant-btn-primary {
   background: #4CAF50;
   border-color: #4CAF50;
@@ -276,7 +269,6 @@
   border-color: #45a049 !important;
 }
 
-/* Tag Styling */
 .ant-tag-success {
   background: #52c41a;
   color: #fff;
@@ -301,7 +293,6 @@
   border: none;
 }
 
-/* Charts Styling */
 .charts-card {
   box-shadow: none !important;
   border: 1px solid #f0f0f0;
@@ -344,12 +335,10 @@
   padding: 16px 0;
 }
 
-/* Hide Month/Year buttons from calendar */
 .ant-picker-calendar-header .ant-picker-calendar-mode-switch {
   display: none !important;
 }
 
-/* Responsive Design */
 @media (max-width: 1200px) {
   .content-grid {
     grid-template-columns: 1fr;
