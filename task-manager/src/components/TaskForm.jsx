@@ -51,8 +51,9 @@ const TaskForm = ({ open, onClose, selectedDate, editTask = null }) => {
       footer={null}
       width={500}
     >
+      
       <Formik
-        key={editTask?.id || 'new'}
+        key={editTask?.id || 'new'} //key prop 
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}

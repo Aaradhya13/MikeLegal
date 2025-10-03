@@ -7,7 +7,7 @@ const TaskCalendar = ({ onDateSelect }) => {
   const { tasks, selectedDate } = useSelector(state => state.tasks)
   const dispatch = useDispatch()
 
-  const getTasksForDate = (date) => {
+  const getTasksForDate = (date) => {//finds all tasks for a specific date so I can display them as colored badges
     const dateStr = date.format('YYYY-MM-DD')
     return tasks.filter(task => task.date === dateStr)
   }
@@ -23,7 +23,7 @@ const TaskCalendar = ({ onDateSelect }) => {
     return statusMap[category] || 'default'
   }
 
-  const cellRender = (current, info) => {
+  const cellRender = (current, info) => {//lets customize each day in the calendar, so I can show task badges on the right dates
     if (info.type !== 'date') return info.originNode
     const dayTasks = getTasksForDate(current)
     return (

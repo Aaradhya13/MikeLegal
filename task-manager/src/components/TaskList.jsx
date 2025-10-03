@@ -24,7 +24,7 @@ const TaskList = ({ selectedDate, onEditTask }) => {
   const { tasks } = useSelector(state => state.tasks)
   const dispatch = useDispatch()
 
-  const dayTasks = tasks.filter(task => task.date === selectedDate)
+  const dayTasks = tasks.filter(task => task.date === selectedDate)//filter n only show relevant tasks
 
   const handleDelete = (task) => {
     if (confirm('Delete this task?')) {
@@ -49,7 +49,7 @@ const TaskList = ({ selectedDate, onEditTask }) => {
             <Button 
               type="text" 
               icon={<EditOutlined />} 
-              onClick={() => onEditTask(task)}
+              onClick={() => onEditTask(task)}//
               title="Edit task"
             />,
             <Button 
@@ -65,7 +65,7 @@ const TaskList = ({ selectedDate, onEditTask }) => {
             title={
               <Space>
                 <Text strong>{task.title}</Text>
-                <Tag color={categoryColors[task.category]}>
+                <Tag color={categoryColors[task.category]}> 
                   {categoryLabels[task.category]}
                 </Tag>
               </Space>

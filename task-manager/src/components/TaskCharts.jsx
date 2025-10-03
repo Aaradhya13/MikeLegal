@@ -14,11 +14,11 @@ const COLORS = {
 
 const TaskCharts = () => {
   const { tasks } = useSelector(state => state.tasks)
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('all')//use local state to control the filters and chart type
   const [appliedCategory, setAppliedCategory] = useState('all')
   const [chartType, setChartType] = useState('bar')
 
-  const getFilteredData = () => {
+  const getFilteredData = () => {//transform task array into chart format
     const filteredTasks = appliedCategory === 'all' 
       ? tasks 
       : tasks.filter(task => task.category === appliedCategory)
@@ -93,7 +93,7 @@ const TaskCharts = () => {
                 ))}
               </Bar>
             </BarChart>
-          ) : (
+          ) : (//conditional rendering
             <PieChart>
               <Pie
                 data={chartData}

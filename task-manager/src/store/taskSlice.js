@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
 
-const loadTasksFromStorage = () => {
+const loadTasksFromStorage = () => {//load exisiting tasks
   const tasks = localStorage.getItem('tasks')
   return tasks ? JSON.parse(tasks) : []
 }
 
-const taskSlice = createSlice({
+const taskSlice = createSlice({//creating reducers n actions together
   name: 'tasks',
   initialState: {
     tasks: loadTasksFromStorage(),
@@ -14,7 +14,7 @@ const taskSlice = createSlice({
   },
   reducers: {
     // Add new task
-    addTask: (state, action) => {
+    addTask: (state, action) => {//creates unique id with timestamp,adds to array n saves to localStorage
       const newTask = {
         id: Date.now(), 
         ...action.payload
