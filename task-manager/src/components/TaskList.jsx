@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteTask } from '../store/taskSlice'
 
 const { Text } = Typography
-const { confirm } = Modal
 
 const categoryColors = {
   success: 'green',
@@ -27,7 +26,7 @@ const TaskList = ({ selectedDate, onEditTask }) => {
   const dayTasks = tasks.filter(task => task.date === selectedDate)//filter n only show relevant tasks
 
   const handleDelete = (task) => {
-    if (confirm('Delete this task?')) {
+    if (window.confirm(`Are you sure you want to delete "${task.title}"?`)) {
       dispatch(deleteTask(task.id))
     }
   }
